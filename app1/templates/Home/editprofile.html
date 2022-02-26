@@ -1,0 +1,83 @@
+{% extends 'Home/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- single course section -->
+<br />
+<section class="single-course spad ">
+     <div class="container">
+          <nav class="navbar navbar-dark bg-dark">
+               <div class="btn-group" role="group">
+                    <button class="button-couse btn    " onclick="location.href='profile'" type="button">
+                         < </button>
+               </div>
+               <h2 style="color: white;">Edit Profile</h2>
+               <div></div>
+          </nav>
+          <div class="course-meta-area  ">
+               <div class="row">
+
+                    <form class="card-body cardbody-color p-5" name="my-form" action="createUser" method="POST">
+                         {% csrf_token %}
+               
+                         <div class="text-center">
+                           <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                             class="img-fluid  img-thumbnail rounded-circle my-3" width="200px" alt="profile">
+                         </div>
+               
+                         <div class="mb-3 row">
+                           <label for="InputUsername" class="col-sm-3 col-form-label"> Username </label>
+                           <div class="col-sm-9">
+                             <input type="text" name="Username" class="form-control" id="Username" placeholder="Username">
+                           </div>
+                         </div>
+               
+                         <div class="mb-3 row">
+                           <label for="InputFirstname" class="col-sm-3 col-form-label"> Firtname </label>
+                           <div class="col-sm-9">
+                             <input type="text" name="Firstname" class="form-control" id="Firstname" placeholder="First Name">
+                           </div>
+                         </div>
+               
+                         <div class="mb-3 row">
+                           <label for="InputLastname" class="col-sm-3 col-form-label"> Lastname </label>
+                           <div class="col-sm-9">
+                             <input type="text" name="Lastname" class="form-control" id="Lastname" placeholder="Last Name">
+                           </div>
+                         </div>
+               
+                         <div class="mb-3 row">
+                           <label for="InputEmail" class="col-sm-3 col-form-label"> Email </label>
+                           <div class="col-sm-9">
+                             <input type="text" name="Email" class="form-control" id="Email" placeholder="Last Name">
+                           </div>
+                         </div>
+               
+                         <div class="mb-3 row">
+                           <label for="InputPassword" class="col-sm-3 col-form-label"> Password </label>
+                           <div class="col-sm-9">
+                             <input type="password" name="Password" class="form-control" id="Password" placeholder="password">
+                           </div>
+                         </div>
+               
+               
+                         <div class="mb-3 row">
+                           <label for="InputRePassword" class="col-md-3 col-form-label"> RePassword </label>
+                           <div class="col">
+                             <input type="password" name="RePassword" class="form-control" id="RePassword" placeholder="Repassword">
+                           </div>
+                         </div>
+                         <div class="text-center" style="margin:40px 0px 0px 0px ;">
+                           <button type="submit" class="btn site-btn px-5 w-50" style="font-size: 16px;"> UPDATE</button>
+                         </div>
+                       </form>
+
+
+
+               </div>
+          </div>
+     </div>
+</section>
+
+
+
+{% endblock%}

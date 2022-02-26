@@ -1,0 +1,45 @@
+{% extends 'Home/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- single course section -->
+<br />
+<section class="single-course spad ">
+     <div class="container">
+          <nav class="navbar navbar-dark bg-dark">
+               <div class="btn-group" role="group">
+                    <button class="button-couse btn    " onclick="location.href='/'" type="button">
+                         < </button>
+               </div>
+               <h2 style="color: white;">Profile</h2>
+               <button class="button-couse btn     " onclick="location.href='editprofilepage'" type="button">edit Profile</button>
+          </nav>
+          <div class="course-meta-area  ">
+               <div class="row">
+                    <div class="col-sm-3 ">
+                         <div class="text-center">
+                              <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                                   class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px"
+                                   alt="profile">
+                         </div>
+                    </div>
+
+                    <div class="col-sm-9 ">
+                         <div>
+                              <h3 style="display: inline-block; width: 50%;"> ชื่อ : {{user.first_name}} </h3>
+                              <h3 style="display: inline-block;"> นามสกุล : {{user.last_name}}  </h3>
+                         </div>
+                         <br />
+                         <div >
+                              <h3> ใส่ๆไปเหอะๆasdfasdfasdfasdfsdfasdfsadfsadfsdfasdfasdf sfsdfasdfsdfvdf dfasdfsadf
+                              </h3>
+                         </div>
+
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>
+
+
+
+{% endblock%}

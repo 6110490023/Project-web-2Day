@@ -1,0 +1,157 @@
+{%extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center text-dark mt-5">register </h2>
+      {%if messages %}
+      <div class="alert alert-danger" role="alert">
+        {% for massage in messages%}
+        <h4>{{ massage }}</h4>
+        {%endfor%}
+      </div>
+      {%endif%}
+
+      <div class="card my-5">
+
+        <form class="card-body cardbody-color p-5" name="my-form" action="createUser" method="POST">
+          {% csrf_token %}
+
+          <div class="text-center">
+            <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+              class="img-fluid  img-thumbnail rounded-circle my-3" width="100px" alt="profile">
+          </div>
+
+          <div class="mb-3 row">
+            <label for="InputUsername" class="col-sm-3 col-form-label"> Username </label>
+            <div class="col-sm-9">
+              <input type="text" name="Username" class="form-control" id="Username" placeholder="Username">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="InputFirstname" class="col-sm-3 col-form-label"> Firtname </label>
+            <div class="col-sm-9">
+              <input type="text" name="Firstname" class="form-control" id="Firstname" placeholder="First Name">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="InputLastname" class="col-sm-3 col-form-label"> Lastname </label>
+            <div class="col-sm-9">
+              <input type="text" name="Lastname" class="form-control" id="Lastname" placeholder="Last Name">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="InputEmail" class="col-sm-3 col-form-label"> Email </label>
+            <div class="col-sm-9">
+              <input type="text" name="Email" class="form-control" id="Email" placeholder="Last Name">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="InputPassword" class="col-sm-3 col-form-label"> Password </label>
+            <div class="col-sm-9">
+              <input type="password" name="Password" class="form-control" id="Password" placeholder="password">
+            </div>
+          </div>
+
+
+          <div class="mb-3 row">
+            <label for="InputRePassword" class="col-md-3 col-form-label"> RePassword </label>
+            <div class="col">
+              <input type="password" name="RePassword" class="form-control" id="RePassword" placeholder="Repassword">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-check col">
+              <input class="form-check-input" type="radio" name="status" id="teacher" value="teacher"
+                onclick="handleClick(this);" checked>
+              <label class="form-check-label" for="teacher">
+                teacher
+              </label>
+            </div>
+
+
+            <div class="form-check col">
+              <input class="form-check-input" type="radio" name="status" id="student" value="student"
+                onclick="handleClick(this);">
+              <label class="form-check-label" for="student">
+                student
+              </label>
+            </div>
+          </div>
+
+
+          <div class="student-box" style="display: none;">
+            <div class="mb-3 row">
+              <label for="year" class="col-md-3 col-form-label"> class </label>
+              <select class="form-select col" name="class" aria-label="Default select example">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+
+            </div>
+            <div class="mb-3 row">
+              <label for="number-class" class="col-md-3 col-form-label"> Room </label>
+              <select class="form-select col" name="room" aria-label="Default select example">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="2">7</option>
+                <option value="3">8</option>
+                <option value="4">9</option>
+                <option value="5">10</option>
+                <option value="6">11</option>
+                <option value="6">12</option>
+              </select>
+
+            </div>
+
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-color px-5 mt-4 w-100">Create Account</button>
+          </div>
+          <div class="form-text text-center mt-3 text-dark">
+
+            Login? <a href="/loginPage" class="text-dark fw-bold"> Back to Login</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function handleClick(status) {
+
+      if (status.value == "student") {
+        var x = document.getElementsByClassName("student-box")
+        var i;
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = 'block';
+        }
+
+      }
+      else {
+        var x = document.getElementsByClassName("student-box")
+        var i;
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = 'none';
+        }
+
+      }
+    }
+
+  </script>
+  {% endblock%}
