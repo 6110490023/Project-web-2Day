@@ -1,0 +1,90 @@
+{% extends 'Home/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- single course section -->
+<br />
+<section class="single-course spad ">
+     <div class="container">
+          <nav class="navbar navbar-dark bg-dark">
+               <div class="btn-group" role="group">
+                    <button class="button-course btn    " onclick="location.href='../course/{{namecourse}}'"
+                         type="button">
+                         < </button>
+                              <button class="button-course btn   " onclick="location.href='../addstudentpage/{{namecourse}}'"
+                                   type="button">Add student</button>
+               </div>
+          </nav>
+          <div class="course-meta-area">
+               <!-- table-->
+               <section class="ftco-section">
+                    <div class="container">
+                         <div class="row">
+                              <div class="col-md-12">
+                                   <div class="table-wrap">
+                                        <table class="table">
+                                             <thead class="table-secondary">
+                                                  <tr>
+                                                       <th>ID no.</th>
+                                                       <th>First Name</th>
+                                                       <th>Last Name</th>
+                                                       <th>Email</th>
+                                                       <th>Class</th>
+                                                       <th>Room</th>
+                                                       <th>Sex</th>
+                                                       <th>&nbsp;</th>
+                                                  </tr>
+                                             </thead>
+                                             <tbody>
+                                                  {% for student in studentList %}
+                                                  <tr class="alert table-light " role="alert">
+                                                       <th scope="row">
+                                                            <h5>{{ student.number }} </h5>
+                                                       </th>
+                                                       <td>
+                                                            <h5>{{ student.name }} </h5>
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.lastname }}</h5>
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.email }} </h5> 
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.class }} </h5> 
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.room }} </h5> 
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.sex }} </h5> 
+                                                       </td>
+                                                       <td>
+                                                            <form class="d-flex align-items-center"
+                                                                 action="../../deletestudent/{{namecourse}}" method="POST">
+                                                                 {% csrf_token %}
+                                                                 <input type="hidden" name="sid" value="{{student.sid}}">
+                                                                 <input type="hidden" name="path"  value="{{request.path}}">
+                                                                 <button class="close" type="submit">
+                                                                      <span aria-hidden="true">
+                                                                           <i class="fa fa-close"></i>
+                                                                      </span>
+                                                                 </button>
+                                                            </form>
+                                                       </td>
+                                                  </tr>
+                                                  {% endfor %}
+                                             </tbody>
+                                        </table>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </section>
+               <!-- endtable-->
+          </div>
+     </div>
+</section>
+
+
+
+{% endblock%}

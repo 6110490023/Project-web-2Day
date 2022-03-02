@@ -8,19 +8,36 @@
           <nav class="navbar navbar-dark  bg-dark">
                <div class="row" style="width: 100%;">
                     <div class="col-lg-2 ">
-                         <button class="button-couse btn " onclick="location.href='couse'" type="button"> < </button>
+                         <button class="button-course btn " onclick="location.href='../studentcourse/{{name}}'"
+                              type="button">
+                              < </button>
                     </div>
-                    <div class="d-flex col-lg-10 align-items-center" >
-                         <form class="course-search-form " style="width: 100%;" >
-                              <div class="input-group " style="height: 100%;" >
-                                   <select class="custom-select" id="inputGroupSelect04"  >
-                                        <option selected>Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                    <div class="d-flex col-lg-10 align-items-center">
+                         <form class="course-search-form " action="../../addstudentpage/{{name}}" method="POST"
+                              style="width: 100%;">
+                              {% csrf_token %}
+                              <div class="input-group " style="height: 100%;">
+                                   <select class="custom-select " id='class-room' name="class_room"
+                                        id="inputGroupSelect04" autofocus>
+                                        {% for class in '123456' %}
+                                        <optgroup label="class {{class}}">
+                                             <option value="{{class}}-1">{{class}}-1</option>
+                                             <option value="{{class}}-2">{{class}}-2</option>
+                                             <option value="{{class}}-3">{{class}}-3</option>
+                                             <option value="{{class}}-4">{{class}}-4</option>
+                                             <option value="{{class}}-5">{{class}}-5</option>
+                                             <option value="{{class}}-6">{{class}}-6</option>
+                                             <option value="{{class}}-7">{{class}}-7</option>
+                                             <option value="{{class}}-8">{{class}}-8</option>
+                                             <option value="{{class}}-9">{{class}}-9</option>
+                                             <option value="{{class}}-10">{{class}}-10</option>
+                                             <option value="{{class}}-11">{{class}}-11</option>
+                                             <option value="{{class}}-12">{{class}}-12</option>
+                                        </optgroup>
+                                        {%endfor%}
                                    </select>
                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button">search</button>
+                                        <button class="btn btn-secondary" type="submit">search</button>
                                    </div>
                               </div>
                          </form>
@@ -28,15 +45,99 @@
                </div>
           </nav>
           <div class="course-meta-area">
-               <div class="row">
-                    <div class="col-lg-10 offset-lg-1">
-
+               <!-- table-->
+               <section class="ftco-section">
+                    <div class="container">
+                         <div class="row">
+                              <div class="col-md-12">
+                                   <div class="table-wrap">
+                                        <table class="table">
+                                             <thead class="table-secondary">
+                                                  <tr>
+                                                       <th>ID no.</th>
+                                                       <th>First Name</th>
+                                                       <th>Last Name</th>
+                                                       <th>Email</th>
+                                                       <th>Class</th>
+                                                       <th>Room</th>
+                                                       <th>Sex</th>
+                                                       <th>&nbsp;</th>
+                                                  </tr>
+                                             </thead>
+                                             <tbody>
+                                                  {% for student in studentList %}
+                                                  <tr class="alert table-light " role="alert">
+                                                       <th scope="row">
+                                                            <h5>{{ student.number }} </h5>
+                                                       </th>
+                                                       <td>
+                                                            <h5>{{ student.name }} </h5>
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.lastname }}</h5>
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.email }} </h5>
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.class }} </h5>
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.room }} </h5>
+                                                       </td>
+                                                       <td>
+                                                            <h5>{{ student.sex }} </h5>
+                                                       </td>
+                                                       <td>{% if student.is_incourse %}
+                                                            <form class="d-flex align-items-center"
+                                                                 action="../../deletestudent/{{name}}" method="POST">
+                                                                 {% csrf_token %}
+                                                                 <input type="hidden" name="sid" value="{{student.sid}}">
+                                                                 <input type="hidden" name="path"  value="{{request.path}}">
+                                                                 <button class="close" type="submit">
+                                                                      <span aria-hidden="true">
+                                                                           <i class="fa fa-close"></i>
+                                                                      </span>
+                                                                 </button>
+                                                            </form>
+                                                            {% endif %}
+                                                            {% if not student.is_incourse%}
+                                                            <form class="d-flex align-items-center" action="../../addstudent/{{name}}" method="POST">
+                                                                 {% csrf_token %}
+                                                                 <input type="hidden" name="sid"  value="{{student.sid}}">
+                                                                 
+                                                                 <button class="close" type="submit">
+                                                                      <span aria-hidden="true">
+                                                                           <i class="fa fa-plus"></i>
+                                                                      </span>
+                                                                 </button>
+                                                            </form>
+                                                            {% endif %}
+                                                       </td>
+                                                  </tr>
+                                                  {% endfor %}
+                                             </tbody>
+                                        </table>
+                                   </div>
+                              </div>
+                         </div>
                     </div>
-               </div>
+               </section>
+               <!-- endtable-->
           </div>
      </div>
 </section>
 
-
+<script type="text/javascript">
+     var select = document.getElementById('class-room');
+     var option;
+     console.log(select.options.length);
+     for (var i = 0; i < select.options.length; i++) {
+          option = select.options[i];
+          if (option.value == '{{ request.session.class_room }}') {
+               option.setAttribute('selected', true);
+          }
+     }
+</script>
 
 {% endblock%}

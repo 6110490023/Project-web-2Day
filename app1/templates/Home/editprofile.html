@@ -4,78 +4,134 @@
 <!-- single course section -->
 <br />
 <section class="single-course spad ">
-     <div class="container">
-          <nav class="navbar navbar-dark bg-dark">
-               <div class="btn-group" role="group">
-                    <button class="button-couse btn    " onclick="location.href='profile'" type="button">
-                         < </button>
-               </div>
-               <h2 style="color: white;">Edit Profile</h2>
-               <div></div>
-          </nav>
-          <div class="course-meta-area  ">
-               <div class="row">
+  <div class="container">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="btn-group" role="group">
+        <button class="button-course btn    " onclick="location.href='profile'" type="button">
+          < </button>
+      </div>
+      <h2 style="color: white;">Edit Profile</h2>
+      <div></div>
+    </nav>
+    <div class="course-meta-area  ">
+      {%if messages %}
+      <div class="d-flex justify-content-center">
+        <div class="alert alert-danger w-50 " role="alert">
+          {% for massage in messages%}
+          <h4>{{ massage }}</h4>
+          {%endfor%}
+        </div>
+      </div>
 
-                    <form class="card-body cardbody-color p-5" name="my-form" action="createUser" method="POST">
-                         {% csrf_token %}
-               
-                         <div class="text-center">
-                           <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
-                             class="img-fluid  img-thumbnail rounded-circle my-3" width="200px" alt="profile">
-                         </div>
-               
-                         <div class="mb-3 row">
-                           <label for="InputUsername" class="col-sm-3 col-form-label"> Username </label>
-                           <div class="col-sm-9">
-                             <input type="text" name="Username" class="form-control" id="Username" placeholder="Username">
-                           </div>
-                         </div>
-               
-                         <div class="mb-3 row">
-                           <label for="InputFirstname" class="col-sm-3 col-form-label"> Firtname </label>
-                           <div class="col-sm-9">
-                             <input type="text" name="Firstname" class="form-control" id="Firstname" placeholder="First Name">
-                           </div>
-                         </div>
-               
-                         <div class="mb-3 row">
-                           <label for="InputLastname" class="col-sm-3 col-form-label"> Lastname </label>
-                           <div class="col-sm-9">
-                             <input type="text" name="Lastname" class="form-control" id="Lastname" placeholder="Last Name">
-                           </div>
-                         </div>
-               
-                         <div class="mb-3 row">
-                           <label for="InputEmail" class="col-sm-3 col-form-label"> Email </label>
-                           <div class="col-sm-9">
-                             <input type="text" name="Email" class="form-control" id="Email" placeholder="Last Name">
-                           </div>
-                         </div>
-               
-                         <div class="mb-3 row">
-                           <label for="InputPassword" class="col-sm-3 col-form-label"> Password </label>
-                           <div class="col-sm-9">
-                             <input type="password" name="Password" class="form-control" id="Password" placeholder="password">
-                           </div>
-                         </div>
-               
-               
-                         <div class="mb-3 row">
-                           <label for="InputRePassword" class="col-md-3 col-form-label"> RePassword </label>
-                           <div class="col">
-                             <input type="password" name="RePassword" class="form-control" id="RePassword" placeholder="Repassword">
-                           </div>
-                         </div>
-                         <div class="text-center" style="margin:40px 0px 0px 0px ;">
-                           <button type="submit" class="btn site-btn px-5 w-50" style="font-size: 16px;"> UPDATE</button>
-                         </div>
-                       </form>
+      {%endif%}
+      <div class="row">
 
+        <form class="card-body cardbody-color p-5" name="my-form" action="editprofile" method="POST">
+          {% csrf_token %}
 
-
-               </div>
+          <div class="text-center"> 
+            <img src="{{ user.image }}"   style="height: 200px; width: 200px;" 
+             class="img-fluid  img-thumbnail rounded-circle my-3" alt="profile">
           </div>
-     </div>
+
+          <div class="mb-3 row">
+            <label for="InputFirstname" class="col-sm-3 col-form-label"> Firstname </label>
+            <div class="col-sm-9">
+              <input type="text" name="Firstname" class="form-control" id="Firstname" placeholder="First Name"
+                value="{{ user.name }}" required>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="InputLastname" class="col-sm-3 col-form-label"> Lastname </label>
+            <div class="col-sm-9">
+              <input type="text" name="Lastname" class="form-control" id="Lastname" placeholder="Last Name"
+                value="{{ user.lastname }}" required>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="PhoneNumber" class="col-sm-3 col-form-label"> Phone </label>
+            <div class="col-sm-9">
+              <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="{{ user.phone }}" required>
+            </div>
+          </div>
+
+          {%if request.session.status == 'teacher'%}
+          <div class="mb-3 row">
+            <label for="subject" class="col-md-3 col-form-label"> Subject </label>
+
+            <div class="col-sm-9">
+              <input type="text" name="subject" class="form-control" id="subject" value="{{ user.subject }}" required>
+            </div>
+          </div>
+          {% endif %}
+
+          {%if request.session.status == 'student'%}
+
+          <div class="mb-3 row">
+            <label for="year" class="col-md-3 col-form-label"> Class </label>
+            <div class="col-sm-9">
+              <select class="form-control form-select  col" name="class" aria-label="Default select example">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="mb-3 row">
+            <label for="number-class" class="col-md-3 col-form-label"> Room </label>
+            <div class="col-sm-9">
+              <select class="form-control form-select col" name="room" aria-label="Default select example">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="mb-3 row">
+            <label for="number" class="col-md-3 col-form-label"> No. </label>
+
+            <div class="col-sm-9">
+              <input type="text" name="number" class="form-control" placeholder="xx" required value="01">
+            </div>
+          </div>
+          
+          {% endif %}
+
+          <div class="mb-3 row">
+            <label for="InputPassword" class="col-sm-3 col-form-label"> Password </label>
+            <div class="col-sm-9">
+              <input type="password" name="Password" class="form-control" id="Password" placeholder="Password">
+            </div>
+          </div>
+
+          <div class="text-center" style="margin:40px 0px 0px 0px ;">
+            <button type="submit" class="btn site-btn px-5 w-50" style="font-size: 16px;"> UPDATE</button>
+          </div>
+        </form>
+
+
+
+      </div>
+    </div>
+  </div>
 </section>
 
 

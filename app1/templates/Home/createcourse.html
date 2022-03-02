@@ -1,0 +1,152 @@
+{% extends 'Home/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- single course section -->
+<br />
+<section class="single-course spad ">
+     <div class="container">
+          <nav class="navbar navbar-dark bg-dark">
+               <div class="btn-group" role="group">
+                    <button class="button-course btn " onclick="location.href='/'" type="button">
+                         < </button>
+               </div>
+               <h2 style="color: white;">Create Course</h2>
+               <div></div>
+          </nav>
+          <div class="course-meta-area  ">
+               <div class="row">
+
+                    <form class="card-body cardbody-color p-5" name="my-form" action="createcourse" method="POST" enctype="multipart/form-data">
+                         {% csrf_token %}
+
+                         <div class="mb-3 row">
+                              <label for="InputCoursename" class="col-sm-3 col-form-label"> Course </label>
+                              <div class="col-sm-9">
+                                   <input type="text" name="coursename" class="form-control" id="coursename"
+                                        placeholder="Course Name">
+                              </div>
+                         </div>
+
+                         <div class="mb-3 row">
+                              <label for="description" class="col-sm-3 col-form-label"> description </label>
+                              <div class="col-sm-9">
+                                   <textarea name="description" class="form-control " id="Description"
+                                        placeholder="Description" rows="4"></textarea>
+                              </div>
+                         </div>
+
+                         <div class="mb-3 row ">
+                              <label for="subject" class="col-md-3 col-form-label"> Image Profile </label>
+                              <div class=" form-check col-sm-9">
+                                   <div class="row" style="padding: 0 px; margin: 0;">
+                                        <div class="col">
+                                             <input class="form-check-input" type="radio" name="Image" value="Default"
+                                                  onclick="handleClick(this);" checked>
+                                             <label class="form-check-label" for="teacher">
+                                                  Default
+                                             </label>
+                                        </div>
+
+                                        <div class=" col">
+                                             <input class="form-check-input" type="radio" name="Image" value="Upload"
+                                                  onclick="handleClick(this);">
+                                             <label class="form-check-label" for="student">
+                                                  Upload
+                                             </label>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+
+                         <div class="Upload-box" style="display: none;">
+                              <div class="mb-3 row">
+                                   <label for="subject" class="col-md-3 col-form-label"> </label>
+                                   <div class="col-sm-9">
+                                        <div class="input-group">
+                                             <div class="custom-file">
+                                                  <input type="file" name = "img" class="custom-file-input" 
+                                                       aria-describedby="customFileInput" id ="img"
+                                                       accept="image/png, image/gif, image/jpeg">
+                                                  <label class="custom-file-label" for="customFileInput">Select file</label>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="Default-box">
+                              <div class="mb-3 row">
+                                   <label for="subject" class="col-md-3 col-form-label"> </label>
+                                   <div class="col-sm-9">
+                                        <div class="mb-3 row">
+                                             <div class="col">
+                                                  <img src="/static/img/courses/math.png" width="200px" height="200px">
+                                                  <input type="radio" name='imgCourse' value="math.png" checked />
+
+                                             </div>
+                                             <div class="col">
+                                                  <img src="/static/img/courses/programmer.jpg" width="200px"
+                                                       height="200px">
+                                                  <input type="radio" name='imgCourse' value="programmer.jpg" />
+
+                                             </div>
+                                             <div class="col">
+                                                  <img src="/static/img/courses/science.jpg" width="200px"
+                                                       height="200px">
+                                                  <input type="radio" name='imgCourse' value="science.jpg" />
+
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+
+
+                         <div class="text-center" style="margin:40px 0px 0px 0px ;">
+                              <button type="submit" class="btn site-btn px-5 w-50" style="font-size: 16px;">
+                                   createCourse</button>
+                         </div>
+                    </form>
+
+
+
+               </div>
+          </div>
+     </div>
+</section>
+
+<script type="text/javascript">
+     function handleClick(type) {
+          console.log('55555');
+          if (type.value == "Upload") {
+               var x = document.getElementsByClassName("Upload-box")
+               var i;
+               for (i = 0; i < x.length; i++) {
+                    x[i].style.display = 'block';
+               }
+               var y = document.getElementsByClassName("Default-box")
+               for (i = 0; i < y.length; i++) {
+                    y[i].style.display = 'none';
+               }
+
+          }
+          else {
+               var x = document.getElementsByClassName("Upload-box")
+               var i;
+               for (i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+               }
+               var y = document.getElementsByClassName("Default-box")
+               for (i = 0; i < y.length; i++) {
+                    y[i].style.display = 'block';
+               }
+
+               
+          }
+          var t = document.getElementById("test").value
+          console.log(t);
+     }
+
+</script>
+
+
+{% endblock%}

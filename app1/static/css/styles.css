@@ -64,7 +64,7 @@ img {
 	max-width: 100%;
 }
 
-input:focus,
+
 select:focus,
 button:focus,
 textarea:focus {
@@ -587,10 +587,6 @@ ol {
 	border-bottom: 2px solid #d82a4e;
 }
 
-.signup-form input[type=file],
-.contact-form input[type=file] {
-	display: none;
-}
 
 .signup-form textarea,
 .contact-form textarea {
@@ -1682,9 +1678,10 @@ ol {
 	}
 }
 /*------------------
-  couse Page
+  course Page
 ---------------------*/
-.button-couse{
+
+.button-course {
 	margin: 5px;
 	display: inline-block;
 	min-width: 50px;
@@ -1697,6 +1694,28 @@ ol {
 	color: #fff;
 	cursor: pointer;
 	background: #d82a4e;
-	
+}
+/*------------------
+  course laout
+---------------------*/
+.name-table{
+	margin: 0;
+	font-weight: 600;
+	color: #474747;
+	font-size: 20px;
+}
+.name-table:hover {
+	text-decoration: underline;
+	color: #d82a4e;
+}
+.test2 {
+    display:none;
+}
 
+.test{
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/project-web-systemfile.appspot.com/o/imageCourse%2Fmath.png?alt=media&token=466a70d5-f052-407e-9da1-bcacc93508ee");
+    height: 100px;
+    width: 100px;
+    display:inline-block;
+    padding: 0 0 0 0px;
 }

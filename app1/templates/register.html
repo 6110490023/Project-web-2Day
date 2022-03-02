@@ -16,8 +16,7 @@
       {%endif%}
 
       <div class="card my-5">
-
-        <form class="card-body cardbody-color p-5" name="my-form" action="createUser" method="POST">
+        <form class="card-body cardbody-color p-5" name="my-form" action="createUser" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
 
           <div class="text-center">
@@ -26,70 +25,112 @@
           </div>
 
           <div class="mb-3 row">
-            <label for="InputUsername" class="col-sm-3 col-form-label"> Username </label>
+            <label for="InputFirstname" class="col-sm-3 col-form-label"> Firstname </label>
             <div class="col-sm-9">
-              <input type="text" name="Username" class="form-control" id="Username" placeholder="Username">
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="InputFirstname" class="col-sm-3 col-form-label"> Firtname </label>
-            <div class="col-sm-9">
-              <input type="text" name="Firstname" class="form-control" id="Firstname" placeholder="First Name">
+              <input type="text" name="Firstname" class="form-control" id="Firstname" placeholder="First Name" required>
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="InputLastname" class="col-sm-3 col-form-label"> Lastname </label>
             <div class="col-sm-9">
-              <input type="text" name="Lastname" class="form-control" id="Lastname" placeholder="Last Name">
+              <input type="text" name="Lastname" class="form-control" id="Lastname" placeholder="Last Name" required>
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="InputEmail" class="col-sm-3 col-form-label"> Email </label>
             <div class="col-sm-9">
-              <input type="text" name="Email" class="form-control" id="Email" placeholder="Last Name">
+              <input type="text" name="Email" class="form-control" id="Email" placeholder="example@example.com"
+                required>
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="InputPassword" class="col-sm-3 col-form-label"> Password </label>
             <div class="col-sm-9">
-              <input type="password" name="Password" class="form-control" id="Password" placeholder="password">
+              <input type="password" name="Password" class="form-control" id="Password" placeholder="password"
+                minlength="8" required>
             </div>
           </div>
-
 
           <div class="mb-3 row">
-            <label for="InputRePassword" class="col-md-3 col-form-label"> RePassword </label>
+            <label for="InputRePassword" class="col-md-3 col-form-label"> Confirm Password </label>
             <div class="col">
-              <input type="password" name="RePassword" class="form-control" id="RePassword" placeholder="Repassword">
+              <input type="password" name="RePassword" class="form-control" id="RePassword"
+                placeholder="confirm password" required>
             </div>
           </div>
+
+          <div class="mb-3 row">
+            <label for="PhoneNumber" class="col-sm-3 col-form-label"> Phone </label>
+            <div class="col-sm-9">
+              <input type="text" name="phone" class="form-control" id="phone" placeholder="08x xxx xxxx" required>
+            </div>
+          </div>
+
           <div class="row">
-            <div class="form-check col">
-              <input class="form-check-input" type="radio" name="status" id="teacher" value="teacher"
-                onclick="handleClick(this);" checked>
-              <label class="form-check-label" for="teacher">
-                teacher
-              </label>
+            <div class="col-3">
+              Sex
             </div>
 
+            <div class="col-9">
+              <div class="form-check col">
+                <input class="form-check-input" type="radio" name="sex" id="male" value="male">
+                <label class="form-check-label" for="male">
+                  male
+                </label>
+              </div>
 
-            <div class="form-check col">
-              <input class="form-check-input" type="radio" name="status" id="student" value="student"
-                onclick="handleClick(this);">
-              <label class="form-check-label" for="student">
-                student
-              </label>
+              <div class="form-check col">
+                <input class="form-check-input" type="radio" name="sex" id="male" value="female">
+                <label class="form-check-label" for="female">
+                  female
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="subject" class="col-md-3 col-form-label"> Profile </label>
+
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input"  name="material" aria-describedby="customFileInput" accept="image/png, image/gif, image/jpeg" required>
+                  <label class="custom-file-label" for="customFileInput">Select file</label>
+                </div>
+
+              </div>
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-3">
+              Status
+            </div>
+
+            <div class="col-9">
+              <div class="form-check col">
+                <input class="form-check-input" type="radio" name="status" id="teacher" value="teacher"
+                  onclick="handleClick(this);" checked>
+                <label class="form-check-label" for="teacher">
+                  teacher
+                </label>
+              </div>
+
+              <div class="form-check col">
+                <input class="form-check-input" type="radio" name="status" id="student" value="student"
+                  onclick="handleClick(this);">
+                <label class="form-check-label" for="student">
+                  student
+                </label>
+              </div>
+            </div>
+          </div>
 
           <div class="student-box" style="display: none;">
             <div class="mb-3 row">
-              <label for="year" class="col-md-3 col-form-label"> class </label>
+              <label for="year" class="col-md-3 col-form-label"> Class </label>
               <select class="form-select col" name="class" aria-label="Default select example">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
@@ -98,8 +139,8 @@
                 <option value="5">5</option>
                 <option value="6">6</option>
               </select>
-
             </div>
+
             <div class="mb-3 row">
               <label for="number-class" class="col-md-3 col-form-label"> Room </label>
               <select class="form-select col" name="room" aria-label="Default select example">
@@ -109,23 +150,41 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
-                <option value="2">7</option>
-                <option value="3">8</option>
-                <option value="4">9</option>
-                <option value="5">10</option>
-                <option value="6">11</option>
-                <option value="6">12</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
               </select>
-
             </div>
 
+            <div class="mb-3 row">
+              <label for="number" class="col-md-3 col-form-label"> No. </label>
+
+              <div class="col-sm-9">
+                <input type="text" name="number" class="form-control" placeholder="xx" required value="01">
+              </div>
+
+            </div>
           </div>
+
+          <div class="teacher-box" style="display: block;">
+
+            <div class="mb-3 row">
+              <label for="subject" class="col-md-3 col-form-label"> Subject </label>
+
+              <div class="col-sm-9">
+                <input type="text" name="subject" class="form-control" id="subject" value="FN101" required>
+              </div>
+            </div>
+          </div>
+
 
           <div class="text-center">
-            <button type="submit" class="btn btn-color px-5 mt-4 w-100">Create Account</button>
+            <button type="submit" class="btn btn-color px-5 mt-4 w-100" value="Submit">Create Account</button>
           </div>
           <div class="form-text text-center mt-3 text-dark">
-
             Login? <a href="/loginPage" class="text-dark fw-bold"> Back to Login</a>
           </div>
         </form>
@@ -141,6 +200,10 @@
         for (i = 0; i < x.length; i++) {
           x[i].style.display = 'block';
         }
+        var y = document.getElementsByClassName("teacher-box")
+        for (i = 0; i < y.length; i++) {
+          y[i].style.display = 'none';
+        }
 
       }
       else {
@@ -149,6 +212,11 @@
         for (i = 0; i < x.length; i++) {
           x[i].style.display = 'none';
         }
+        var y = document.getElementsByClassName("teacher-box")
+        for (i = 0; i < y.length; i++) {
+          y[i].style.display = 'block';
+        }
+
 
       }
     }

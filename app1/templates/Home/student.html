@@ -12,37 +12,46 @@
                     <h2>Student HomePage</h2>
                     <div></div>
                </div>
-               
+
           </div>
           <div class="row course-items-area">
+               {% for course in my_course %}
                <!-- course -->
                <div class="mix col-lg-3 col-md-4 col-sm-6 photo">
-                    <a href="couse">
-                         <div class="course-item">
-                              <div class="course-thumb  "
-                                   style="background-image: url(../../static/img/courses/4.jpg);">
+                    <div class="course-item">
+                         <div class="course-thumb" style="background-image: url(../../static/img/courses/4.jpg);">
+                              
 
-                              </div>
+
+                         </div>
+                         <a href="course/{{course.coursename}} ">
                               <div class="course-info">
                                    <div class="course-text">
-                                        <h5>IT Development</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                        <div class="students">120 Students</div>
+                                        <h5>{{ course.coursename }}</h5>
+                                        <p>{{ course.description }}</p>
+                                        <div class="students">{{course.count}} Students</div>
                                    </div>
                                    <div class="course-author">
                                         <div class="ca-pic set-bg" data-setbg="img/authors/4.jpg"></div>
-                                        <p>William Parker, <span>Developer</span></p>
+                                        <p>{{ course.teacherName }}, <span>{{ course.teacherSubject }} Teacher</span>
+                                        </p>
                                    </div>
                               </div>
-                         </div>
-                    </a>
+                    
+                         </a>
+                    </div>
 
                </div>
                <!-- end course -->
+               {%endfor%}
+
           </div>
      </div>
 </section>
 <!-- categories section end -->
 
 
+
+
 {% endblock%}
+

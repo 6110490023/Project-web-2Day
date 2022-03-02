@@ -7,29 +7,39 @@
   <div class="container">
     <nav class="navbar navbar-dark bg-dark">
       <div class="btn-group" role="group">
-        <button class="button-couse btn    " onclick="location.href='couse'" type="button">
+        <button class="button-course btn    " onclick="location.href='../course/{{name}}'" type="button">
           < </button>
       </div>
       <h2 style="color: white;">Create Folder</h2>
-      <div >
+      <div>
       </div>
     </nav>
     <div class="course-meta-area  ">
-      <div class="row">
+      {%if messages %}
+      <div class="d-flex justify-content-center">
+        <div class="alert alert-danger w-50 " role="alert">
+          {% for massage in messages%}
+          <h4>{{ massage }}</h4>
+          {%endfor%}
+        </div>
+      </div>
 
-        <form class="card-body cardbody-color p-5" name="my-form" action="#" method="POST">
+      {%endif%}
+      <div class="row">
+        <form class="card-body cardbody-color p-5" name="my-form" action="../newfolder" method="POST">
           {% csrf_token %}
 
 
           <div class="mb-3 row">
-            <label for="InputFoldernamee" class="col-sm-3 col-form-label"> Folder name  </label>
+            <label for="InputFoldernamee" class="col-sm-3 col-form-label"> Folder name </label>
             <div class="col-sm-9">
               <input type="text" name="foldername" class="form-control" id="foldername" placeholder="Folder name">
             </div>
           </div>
 
           <div class="text-center" style="margin:40px 0px 0px 0px ;">
-            <button type="submit" class="btn site-btn px-5 w-50" style="font-size: 18px;"> Create folder</button>
+            <button type="submit" class="btn site-btn px-5 w-50" style="font-size: 18px;" name="course"
+              value="{{name}}"> Create folder</button>
           </div>
         </form>
 

@@ -1,0 +1,83 @@
+{% extends 'Home/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- single course section -->
+<br />
+<section class="single-course spad ">
+     <div class="container">
+          <nav class="navbar navbar-dark bg-dark">
+               <div class="btn-group" role="group">
+                    <button class="button-course btn    " onclick="location.href='/'" type="button">
+                         < </button>
+                              {% if request.session.status == "teacher" %}
+                              <button class="button-course btn   "
+                                   onclick="location.href='/studentcourse/{{ coursename }}'" type="button">student in
+                                   course</button>
+                              {% endif %}
+               </div>
+               <h2 style="color: white;">{{ coursename }}</h2>
+               {% if request.session.status == "student" %}
+               <div></div>
+               {% endif %}
+
+               {% if request.session.status == "teacher" %}
+               <button class="button-course btn" onclick="location.href= '../newfolderpage/{{ coursename }} '"
+                    type="button">New
+                    Folder</button>
+               {% endif %}
+          </nav>
+
+          <div class="course-meta-area">
+               <!-- table-->
+               <section class="ftco-section">
+                    <div class="container">
+                         <div class="row">
+                              <div class="col-md-12">
+                                   <div class="table-wrap">
+                                        <table class="table">
+                                             <thead class="table-secondary">
+                                                  <tr>
+                                                       <th>ID no.</th>
+                                                       <th>First Name</th>
+                                                       <th>Last Name</th>
+                                                       <th>Email</th>
+                                                       <th>&nbsp;</th>
+                                                  </tr>
+                                             </thead>
+                                             <tbody>
+                                                  {% for folder in folder_All %}
+                                                  <tr class="alert table-light" role="alert">
+
+                                                       <th scope="row">{{ forloop.counter }}</th>
+                                                       <td>
+                                                            <a class="name-table" href="{% url 'openfolder' coursename folder.folder_name %}">
+                                                                      {{ folder.folder_name }}
+                                                            </a>
+
+                                                       </td>
+                                                       <td>Otto</td>
+                                                       <td>markotto@email.com</td>
+
+                                                       <td>
+                                                            <a href="../deletefolder/{{ coursename }}/{{ folder.folder_name }}" class="close" aria-label="Close">
+                                                                 <span aria-hidden="true"><i
+                                                                           class="fa fa-close"></i></span>
+                                                            </a>
+                                                       </td>
+                                                  </tr>
+                                                  {% endfor %}
+                                             </tbody>
+                                        </table>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </section>
+               <!-- endtable-->
+          </div>
+     </div>
+</section>
+
+
+
+{% endblock%}
